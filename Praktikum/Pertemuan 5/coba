@@ -1,0 +1,51 @@
+class CircularDoubleLinkedList:
+    # ... (kode lainnya sama)
+
+    def Move(self, index_a, index_b):
+        if self.isEmpty():
+            print("List is empty")
+            return
+
+        # Validasi indeks a dan b
+        if index_a < 0 or index_b < 0:
+            print("Invalid index")
+            return
+
+        if index_a == index_b:
+            return  # Tidak ada yang perlu dilakukan jika indeks a dan b sama
+
+        current_a = self.head
+        current_b = self.head
+        node_a = None
+        node_b = None
+
+        # Cari node dengan indeks a
+        for i in range(index_a):
+            if current_a is None:
+                print("Index out of range")
+                return
+            node_a = current_a
+            current_a = current_a.next
+
+        # Cari node dengan indeks b
+        for i in range(index_b):
+            if current_b is None:
+                print("Index out of range")
+                return
+            node_b = current_b
+            current_b = current_b.next
+
+        # Tukar posisi node a dan node b
+        if node_a is not None:
+            node_a.next = current_b
+        else:
+            self.head = current_b
+
+        if node_b is not None:
+            node_b.next = current_a
+        else:
+            self.head = current_a
+
+        current_a.next, current_b.next = current_b.next, current_a.next
+
+    # ... (kode lainnya sama)
